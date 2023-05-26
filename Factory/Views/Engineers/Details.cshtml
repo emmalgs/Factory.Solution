@@ -17,15 +17,17 @@ else
   <table>
     <th scope="col">Machine</th>
     <th scope="col">Last Maintanence</th>
-    @foreach(Machine machine in Model.JoinEntities)
+    @foreach(EngineerMachine join in Model.JoinEntities)
     {
       <tr>
-        <td>@machine.Name</td>
-        <td>@machine.LastMaintenance</td>
+        <td>@join.Machine.Name</td>
+        <td>@join.Machine.LastMaintenance</td>
       </tr>
     }
   </table>
 }
 
-@Html.ActionLink("Add Machine License", "AddMachine", new { id = Model.EngineerId })
+
+@Html.ActionLink("Edit Engineer Info", "Edit", new { id = Model.EngineerId }, new { @class = "btn" })
+@Html.ActionLink("Add Machine License", "AddMachine", new { id = Model.EngineerId }, new { @class = "btn" })
 
