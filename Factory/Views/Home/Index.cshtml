@@ -1,0 +1,51 @@
+@{
+  Layout = "_Layout";
+  List<Machine> allMachines = ViewBag.machines;
+  List<Engineer> allEngineers = ViewBag.engineers;
+}
+
+@using Factory.Models
+
+<h1>Welcome back, Doctor!</h1>
+
+<div class="splash-container">
+  <div class="machine-col">
+    @if (allMachines.Count == 0)
+    {
+      <p>There are no machines in your factory</p>
+    }
+    else
+    {
+      <table class="table-bordered">
+        <th scope="col">Name</th>
+        <th scope="col">Last Maintanence Date</th>
+      @foreach (Machine machine in allMachines)
+      {
+        <tr>
+          <td>@machine.Name</td>
+          <td>@machine.LastMaintenance</td>
+        </tr>
+      }
+      </table>
+    }
+  </div>
+
+  <div class="engineer-col">
+    @if (allEngineers.Count == 0)
+    {
+      <p>There are no engineers</p>
+    }
+    else
+    {
+      <table class="table-bordered">
+        <th scope="col">Name</th>
+        @foreach (Engineer engineer in allEngineers)
+        {
+          <tr>
+            <td>@engineer.Name</td>
+          </tr>
+        }
+      </table>
+    }
+  </div>
+</div>
