@@ -16,12 +16,17 @@ else
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Last Maintenance</th>
+      <th scope="col">Status</th>
+      <th scope="col">Location</th>
+
     </tr>
     @foreach(Machine machine in Model)
     {
       <tr>
         <td>@Html.ActionLink($"{machine.Name}", "Details", new { id = machine.MachineId })</td>
         <td>@machine.LastMaintenance</td>
+        <td>@machine.Status</td>
+        <td>@machine.Location.City, @machine.Location.Country</td>
       </tr>
     }
   </table>
