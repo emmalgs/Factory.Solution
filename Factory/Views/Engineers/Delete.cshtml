@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+<h2>Are you sure you want to remove this engineer? </h2>
+
+@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.EngineerId)
+  <input type="submit" value="Delete" />
+}
+@Html.ActionLink("Cancel", "Details", new { id = Model.EngineerId })
