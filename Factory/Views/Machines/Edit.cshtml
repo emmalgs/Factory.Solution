@@ -18,7 +18,13 @@
   @Html.LabelFor(model => model.LastMaintenance)
   @Html.EditorFor(model => model.LastMaintenance, new { type="date" })
 
-  <input type="submit" value="Save" />
+  @Html.LabelFor(model => model.Location)
+  @Html.DropDownList("LocationId")
+
+  @Html.LabelFor(model => model.Status)
+  @Html.DropDownList("Status")
+
+  <input type="submit" value="Save" class="btn" />
 }
 
 <p>@Html.ActionLink("Cancel", "Details", new { id = Model.MachineId }, new { @class="btn" })</p>

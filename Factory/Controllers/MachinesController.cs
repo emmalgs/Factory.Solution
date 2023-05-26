@@ -24,6 +24,7 @@ namespace Factory.Controllers
     public ActionResult Create()
     {
       ViewBag.allLocations = _db.Locations.ToList();
+      ViewBag.Status = new SelectList(Machine.StatusOptions, "Value", "Value");
       ViewBag.LocationId = new SelectList(_db.Locations, "LocationId", "City");
       return View();
     }
@@ -33,6 +34,9 @@ namespace Factory.Controllers
     {
       if (!ModelState.IsValid)
       {
+        ViewBag.allLocations = _db.Locations.ToList();
+        ViewBag.Status = new SelectList(Machine.StatusOptions, "Value", "Value");
+        ViewBag.LocationId = new SelectList(_db.Locations, "LocationId", "City");
         return View();
       }
       else
@@ -55,8 +59,18 @@ namespace Factory.Controllers
 
     public ActionResult Edit(int id)
     {
+      ViewBag.Status = new SelectList(Machine.StatusOptions, "Value", "Value");
+      ViewBag.LocationId = new SelectList(_db.Locations, "LocationId", "City");
       Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
       return View(thisMachine);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Machine machine)
+    {
+      _db.Machines.Update(machine);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = machine.MachineId });
     }
 
     public ActionResult Delete(int id)
@@ -74,13 +88,7 @@ namespace Factory.Controllers
       return RedirectToAction("Index");
     }
 
-    [HttpPost]
-    public ActionResult Edit(Machine machine)
-    {
-      _db.Machines.Update(machine);
-      _db.SaveChanges();
-      return RedirectToAction("Details", new { id = machine.MachineId });
-    }
+
 
     public ActionResult AddEngineer(int id)
     {
