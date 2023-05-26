@@ -13,8 +13,20 @@
 }
 else
 {
-  <h4>Licensed Machines under Operation:</h4>
-  <table>
+  <h4>
+  Status:     
+    @if (Model.Idle == true)
+    {
+      <span>Idle</span>
+    }
+    else
+    {
+      <span>Repairing</span>
+  }
+</h4>
+<h4>Location: @Model.Location.City, @Model.Location.Country</h4>
+<h4>Licensed Machines under Operation:</h4>
+  <table class="table-bordered">
     <th scope="col">Machine</th>
     <th scope="col">Last Maintanence</th>
     @foreach(EngineerMachine join in Model.JoinEntities)
@@ -25,6 +37,7 @@ else
       </tr>
     }
   </table>
+
 }
 
 

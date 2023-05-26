@@ -15,6 +15,15 @@
   @Html.LabelFor(model => model.Name)
   @Html.EditorFor(model => model.Name)
 
+  <div class="radio-form">
+    @Html.LabelFor(model => model.Idle)
+    @Html.RadioButtonFor(model => model.Idle, "true")
+    <label for="Idle">Repairing</label>
+    @Html.RadioButtonFor(model => model.Idle, "false")
+  </div>
+
+  <p>@Html.LabelFor(model => model.Location): @Html.DropDownList("LocationId")</p>
+
   <input type="submit" value="Save" />
 }
 

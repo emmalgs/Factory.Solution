@@ -49,6 +49,7 @@ namespace Factory.Controllers
     public ActionResult Details(int id)
     {
       Engineer thisEngineer = _db.Engineers
+                                .Include(engineer => engineer.Location)
                                 .Include(engineer => engineer.JoinEntities)
                                 .ThenInclude(join => join.Machine)
                                 .FirstOrDefault(engineer => engineer.EngineerId == id);
@@ -57,8 +58,17 @@ namespace Factory.Controllers
 
     public ActionResult Edit(int id)
     {
+      ViewBag.LocationId = new SelectList(_db.Locations, "LocationId", "City");
       Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
       return View(thisEngineer);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Engineer engineer)
+    {
+      _db.Engineers.Update(engineer);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = engineer.EngineerId });
     }
 
     public ActionResult Delete(int id)
@@ -76,13 +86,7 @@ namespace Factory.Controllers
       return RedirectToAction("Index");
     }
 
-    [HttpPost]
-    public ActionResult Edit(Engineer engineer)
-    {
-      _db.Engineers.Update(engineer);
-      _db.SaveChanges();
-      return RedirectToAction("Details", new { id = engineer.EngineerId });
-    }
+
 
     public ActionResult AddMachine(int id)
     {

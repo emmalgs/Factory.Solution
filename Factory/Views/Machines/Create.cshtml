@@ -7,6 +7,7 @@
 @using Factory.Models
 
 <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class="text-danger" })</p>
+<p>@Html.ValidationMessageFor(model => model.LocationId, "", new { @class="text-danger" })</p>
 
 @if (locations.Count == 0)
 {
