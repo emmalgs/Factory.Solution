@@ -13,16 +13,33 @@
 else
 {
   <table class="table-bordered">
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Lisenses</th>
-    </tr>
-    @foreach(Engineer engineer in Model)
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Status</th>
+    <th scope="col">Licenses</th>
+  </tr>
+  @foreach (Engineer engineer in Model)
     {
-      <td>@Html.ActionLink($"{engineer.Name}", "Details", new { id = engineer.EngineerId })</td>
-      <td></td>
+      <tr>
+        <td rowspan=$"{engineer.JoinEntities.Count}">@Html.ActionLink($"{engineer.Name}", "Details", new { id =
+      engineer.EngineerId })</td>
+        @if (engineer.Idle == true)
+        {
+          <td>Idle</td>
+        }
+        else
+        {
+          <td>Repairing</td>
+        }
+        <td>
+          @foreach (EngineerMachine join in engineer.JoinEntities)
+          {
+            <li>@join.Machine.Name</li>
+          }
+        </td>
+      </tr>
     }
   </table>
 }
 
-  @Html.ActionLink("Add Engineer", "Create")
+@Html.ActionLink("Add Engineer", "Create")

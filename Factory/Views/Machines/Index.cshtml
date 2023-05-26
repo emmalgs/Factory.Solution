@@ -19,8 +19,10 @@ else
     </tr>
     @foreach(Machine machine in Model)
     {
-      <td>@Html.ActionLink($"{machine.Name}", "Details", new { id = machine.MachineId })</td>
-      <td>@machine.LastMaintenance</td>
+      <tr>
+        <td>@Html.ActionLink($"{machine.Name}", "Details", new { id = machine.MachineId })</td>
+        <td>@machine.LastMaintenance</td>
+      </tr>
     }
   </table>
 }

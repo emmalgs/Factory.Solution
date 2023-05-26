@@ -3,6 +3,7 @@
 }
 
 @model Factory.Models.Engineer
+@using Factory.Models
 
 <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class="text-danger" })</p>
 
@@ -11,6 +12,10 @@
 {
   @Html.LabelFor(model => model.Name)
   @Html.TextBoxFor(model => model.Name)
+
+  @Html.LabelFor(model => model.Idle)
+  @Html.RadioButtonFor(model => model.Idle, "true")
+  @Html.RadioButtonFor(model =>model.Idle, "false")
 
   <input type="submit" value="Add Engineer" />
 }

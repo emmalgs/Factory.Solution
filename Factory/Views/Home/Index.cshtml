@@ -6,10 +6,9 @@
 
 @using Factory.Models
 
-<h1>Welcome back, Doctor!</h1>
-
 <div class="splash-container">
   <div class="machine-col">
+    <h2>Machines</h2>
     @if (allMachines.Count == 0)
     {
       <p>There are no machines in your factory</p>
@@ -31,6 +30,7 @@
   </div>
 
   <div class="engineer-col">
+    <h2>Engineers</h2>
     @if (allEngineers.Count == 0)
     {
       <p>There are no engineers</p>
