@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Location
+<h2>Are you sure you want to remove this location? </h2>
+
+<h4>@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.Country)</h4>
+
+<div class="btn-container">
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.LocationId)
+  <input class="btn" type="submit" value="Delete" />
+}
+@Html.ActionLink("Cancel", "Details", new { id = Model.LocationId }, new { @class = "btn" })
+</div>

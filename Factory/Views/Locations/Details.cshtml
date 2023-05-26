@@ -1,0 +1,52 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Location
+@using Factory.Models
+
+<h2>@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.Country)</h2>
+
+@if (Model.Engineers.Count == 0)
+{
+  <p>This location has no engineers.</p>
+}
+else
+{
+  <h4>Engineers:</h4>
+  <table>
+    <th scope="col">Name</th>
+    <th scope="col">Status</th>
+    @foreach(Engineer engineer in Model.Engineers)
+    {
+      <tr>
+        <td>@engineer.Name</td>
+        <td>@engineer.Idle</td>
+      </tr>
+    }
+  </table>
+}
+
+@if (Model.Machines.Count == 0)
+{
+  <p>This location has no machines.</p>
+}
+else
+{
+    <h4>Machines:</h4>
+  <table>
+    <th scope="col">Name</th>
+    <th scope="col">Last Maintained</th>
+    @foreach(Machine machine in Model.Machines)
+    {
+      <tr>
+        <td>@machine.Name</td>
+        <td>@machine.LastMaintenance</td>
+      </tr>
+    }
+  </table>
+}
+
+
+@Html.ActionLink("Edit Location Info", "Edit", new { id = Model.LocationId }, new { @class = "btn" })
+@Html.ActionLink("Delete", "Delete", new { id = Model.LocationId }, new { @class = "btn" })

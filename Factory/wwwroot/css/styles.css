@@ -1,9 +1,9 @@
 :root {
-  --main-color: #83B692;
-  --main-contrast: #F9ADA0;
-  --font-color: #070600;
-  --secondary-color: #F3B700;
-  --secondary-contrast: #05668D;
+  --main-color: #0E4749;
+  --main-contrast: #EFE7DA;
+  --font-color: #002626;
+  --secondary-color: #95C623;
+  --secondary-contrast: #E55812;
 }
 
 #header {
@@ -58,8 +58,14 @@
   height: 200vh;
 }
 
+table {
+  padding: 20px;
+  margin: 30px;
+}
+
 table th {
   padding: 10px;
+
 }
 
 table td {

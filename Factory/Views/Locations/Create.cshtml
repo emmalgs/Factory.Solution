@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Location
+@using Factory.Models
+
+<p>@Html.ValidationMessageFor(model => model.City, "", new { @class="text-danger" })</p>
+<p>@Html.ValidationMessageFor(model => model.Country, "", new { @class="text-danger" })</p>
+
+<h4>Add Factory Location</h4>
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.City)
+  @Html.TextBoxFor(model => model.City)
+
+  @Html.LabelFor(model => model.Country)
+  @Html.TextBoxFor(model => model.Country)
+
+  <input type="submit" value="Add Factory" />
+}

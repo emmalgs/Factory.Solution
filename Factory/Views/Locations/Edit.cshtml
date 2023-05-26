@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Location
+
+<h2>Edit Location</h2>
+
+<h4>@Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.Country)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.LocationId)
+
+  @Html.LabelFor(model => model.City)
+  @Html.EditorFor(model => model.City)
+
+  @Html.LabelFor(model => model.Country)
+  @Html.EditorFor(model => model.Country)
+
+  <input type="submit" value="Save" class="btn" />
+}
+
+<p>@Html.ActionLink("Cancel", "Details", new { id = Model.LocationId }, new { @class="btn" })</p>
