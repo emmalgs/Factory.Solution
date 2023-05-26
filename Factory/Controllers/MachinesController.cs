@@ -17,7 +17,9 @@ namespace Factory.Controllers
 
     public ActionResult Index()
     {
-      List<Machine> machines = _db.Machines.ToList();
+      List<Machine> machines = _db.Machines
+                                .Include(machine => machine.Location)
+                                .ToList();
       return View(machines);
     }
 
