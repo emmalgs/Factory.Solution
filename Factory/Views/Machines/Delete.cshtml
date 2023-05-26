@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Machine
+<h2>Are you sure you want to remove this machine? </h2>
+
+@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+
+<div class="btn-container">
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.MachineId)
+  <input class="btn" type="submit" value="Delete" />
+}
+@Html.ActionLink("Cancel", "Details", new { id = Model.MachineId }, new { @class = "btn" })
+</div>

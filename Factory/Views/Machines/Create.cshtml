@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Machine
+
+<p>@Html.ValidationMessageFor(model => model.Name, "", new { @class="text-danger" })</p>
+
+<h4>Add Machine</h4>
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+
+  @Html.LabelFor(model => model.LastMaintenance)
+  @Html.TextBoxFor(model => model.LastMaintenance, new { type = "datetime-local"})
+
+  <input type="submit" value="Add Machine" class="btn" />
+}
