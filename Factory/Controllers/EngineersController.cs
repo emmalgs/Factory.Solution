@@ -26,6 +26,8 @@ namespace Factory.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.allLocations = _db.Locations.ToList();
+      ViewBag.LocationId = new SelectList(_db.Locations, "LocationId", "City");
       return View();
     }
 

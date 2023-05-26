@@ -1,21 +1,36 @@
 @{
   Layout = "_Layout";
+  List<Location> locations = ViewBag.allLocations;
 }
 
 @model Factory.Models.Engineer
 @using Factory.Models
 
 <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class="text-danger" })</p>
+<p>@Html.ValidationMessageFor(model => model.LocationId, "", new { @class="text-danger" })</p>
 
-<h4>Add Engineer</h4>
-@using (Html.BeginForm())
+@if (locations.Count == 0)
 {
-  @Html.LabelFor(model => model.Name)
-  @Html.TextBoxFor(model => model.Name)
-
-  @Html.LabelFor(model => model.Idle)
-  @Html.RadioButtonFor(model => model.Idle, "true")
-  @Html.RadioButtonFor(model =>model.Idle, "false")
-
-  <input type="submit" value="Add Engineer" />
+  <p>Please add a location before hiring an engineer.</p>
+  @Html.ActionLink("Add Factory Location", "Create", "Locations", new { @class = "btn" })
 }
+else
+{
+  <h4>Add Engineer</h4>
+  @using (Html.BeginForm())
+  {
+    <p>@Html.LabelFor(model => model.Name): @Html.TextBoxFor(model => model.Name)</p>
+
+    <div class="radio-form">
+      @Html.LabelFor(model => model.Idle)
+      @Html.RadioButtonFor(model => model.Idle, "true")
+      <label for="Idle">Repairing</label>
+      @Html.RadioButtonFor(model => model.Idle, "false")
+    </div>
+
+    <p>@Html.LabelFor(model => model.Location): @Html.DropDownList("LocationId")</p>
+
+    <input type="submit" value="Add Engineer" class="btn" />
+  }
+}
+

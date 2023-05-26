@@ -23,6 +23,8 @@ namespace Factory.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.allLocations = _db.Locations.ToList();
+      ViewBag.LocationId = new SelectList(_db.Locations, "LocationId", "City");
       return View();
     }
 
@@ -44,6 +46,7 @@ namespace Factory.Controllers
     public ActionResult Details(int id)
     {
       Machine thisMachine = _db.Machines
+                                .Include(machine => machine.Location)
                                 .Include(machine => machine.JoinEntities)
                                 .ThenInclude(join => join.Engineer)
                                 .FirstOrDefault(machine => machine.MachineId == id);

@@ -80,6 +80,7 @@ namespace Factory.Controllers
     public ActionResult DeleteConfirmed(int id)
     {
       Location thisLocation = _db.Locations.FirstOrDefault(location => location.LocationId == id);
+      _db.Locations.Remove(thisLocation);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

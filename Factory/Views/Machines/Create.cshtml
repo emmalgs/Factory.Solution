@@ -1,19 +1,32 @@
 @{
   Layout = "_Layout";
+  List<Location> locations = ViewBag.allLocations;
 }
 
 @model Factory.Models.Machine
+@using Factory.Models
 
 <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class="text-danger" })</p>
 
-<h4>Add Machine</h4>
-@using (Html.BeginForm())
+@if (locations.Count == 0)
 {
-  @Html.LabelFor(model => model.Name)
-  @Html.TextBoxFor(model => model.Name)
+  <p>Please add a location before hiring an engineer.</p>
+  @Html.ActionLink("Add Factory Location", "Create", "Locations", new { @class = "btn" })
+}
+else
+  {
+  <h4>Add Machine</h4>
+  @using (Html.BeginForm())
+  {
+    @Html.LabelFor(model => model.Name)
+    @Html.TextBoxFor(model => model.Name)
 
-  @Html.LabelFor(model => model.LastMaintenance)
-  @Html.TextBoxFor(model => model.LastMaintenance, new { type = "datetime-local"})
+    @Html.LabelFor(model => model.LastMaintenance)
+    @Html.TextBoxFor(model => model.LastMaintenance, new { type = "datetime-local"})
 
-  <input type="submit" value="Add Machine" class="btn" />
+    @Html.LabelFor(model => model.Location)
+    @Html.DropDownList("LocationId")
+
+    <input type="submit" value="Add Machine" class="btn" />
+  }
 }
