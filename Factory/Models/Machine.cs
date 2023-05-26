@@ -8,6 +8,8 @@ namespace Factory.Models
     public int MachineId { get; set; }
     public string Name { get; set; }
     public DateTime LastMaintenance { get; set; }
+    public int LocationId { get; set; }
+    public Location Location { get; set; }
     public List<EngineerMachine> JoinEntities { get; }
   }
 }
