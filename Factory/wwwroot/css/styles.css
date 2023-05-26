@@ -77,6 +77,12 @@ table td {
   justify-content: space-evenly;
 }
 
+.btn-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
 @keyframes move{
   0% {
     transform: translateX(-10%);

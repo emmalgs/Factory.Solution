@@ -6,9 +6,12 @@
 <h2>Are you sure you want to remove this engineer? </h2>
 
 @Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+
+<div class="btn-container">
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.EngineerId)
-  <input type="submit" value="Delete" />
+  <input class="btn" type="submit" value="Delete" />
 }
-@Html.ActionLink("Cancel", "Details", new { id = Model.EngineerId })
+@Html.ActionLink("Cancel", "Details", new { id = Model.EngineerId }, new { @class = "btn" })
+</div>
