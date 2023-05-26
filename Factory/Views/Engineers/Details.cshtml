@@ -1,0 +1,31 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+@using Factory.Models
+
+<h2>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h2>
+
+@if (Model.JoinEntities.Count == 0)
+{
+  <p>This engineer is not licensed to any machines yet</p>
+}
+else
+{
+  <h4>Licensed Machines under Operation:</h4>
+  <table>
+    <th scope="col">Machine</th>
+    <th scope="col">Last Maintanence</th>
+    @foreach(Machine machine in Model.JoinEntities)
+    {
+      <tr>
+        <td>@machine.Name</td>
+        <td>@machine.LastMaintenance</td>
+      </tr>
+    }
+  </table>
+}
+
+@Html.ActionLink("Add Machine License", "AddMachine", new { id = Model.EngineerId })
+

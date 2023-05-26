@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+
+<h2>Add Machine License</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.EngineerId)
+
+  @Html.Label("Select Machine")
+  @Html.DropDownList("MachineId")
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Cancel", "Index")</p>
