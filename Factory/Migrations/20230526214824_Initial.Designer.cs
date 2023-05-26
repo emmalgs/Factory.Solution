@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Factory.Migrations
 {
     [DbContext(typeof(FactoryContext))]
-    [Migration("20230526210053_IdlePropertyToEngineer")]
-    partial class IdlePropertyToEngineer
+    [Migration("20230526214824_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,11 +30,16 @@ namespace Factory.Migrations
                     b.Property<bool>("Idle")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("EngineerId");
+
+                    b.HasIndex("LocationId");
 
                     b.ToTable("Engineers");
                 });
@@ -60,6 +65,25 @@ namespace Factory.Migrations
                     b.ToTable("EngineerMachines");
                 });
 
+            modelBuilder.Entity("Factory.Models.Location", b =>
+                {
+                    b.Property<int>("LocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("LocationId");
+
+                    b.ToTable("Locations");
+                });
+
             modelBuilder.Entity("Factory.Models.Machine", b =>
                 {
                     b.Property<int>("MachineId")
@@ -69,12 +93,28 @@ namespace Factory.Migrations
                     b.Property<DateTime>("LastMaintenance")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
                     b.HasKey("MachineId");
 
+                    b.HasIndex("LocationId");
+
                     b.ToTable("Machines");
+                });
+
+            modelBuilder.Entity("Factory.Models.Engineer", b =>
+                {
+                    b.HasOne("Factory.Models.Location", "Location")
+                        .WithMany("Engineers")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("Factory.Models.EngineerMachine", b =>
@@ -96,9 +136,27 @@ namespace Factory.Migrations
                     b.Navigation("Machine");
                 });
 
+            modelBuilder.Entity("Factory.Models.Machine", b =>
+                {
+                    b.HasOne("Factory.Models.Location", "Location")
+                        .WithMany("Machines")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Location");
+                });
+
             modelBuilder.Entity("Factory.Models.Engineer", b =>
                 {
                     b.Navigation("JoinEntities");
+                });
+
+            modelBuilder.Entity("Factory.Models.Location", b =>
+                {
+                    b.Navigation("Engineers");
+
+                    b.Navigation("Machines");
                 });
 
             modelBuilder.Entity("Factory.Models.Machine", b =>
