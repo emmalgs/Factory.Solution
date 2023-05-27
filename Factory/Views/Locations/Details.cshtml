@@ -21,7 +21,14 @@ else
     {
       <tr>
         <td>@engineer.Name</td>
-        <td>@engineer.Idle</td>
+        @if (engineer.Idle == true)
+        {
+          <td>Idle</td>
+        }
+        else
+        {
+          <td>Repairing</td>
+        }
       </tr>
     }
   </table>

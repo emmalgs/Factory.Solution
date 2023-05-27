@@ -7,8 +7,8 @@
 }
 
 #header {
-  background-image: url('../img/bread.png');
-  background-position: center;
+  display: flex;
+  justify-content: space-evenly;
   height: 20vh;
   width: 100vw;
   background-size: contain;
@@ -49,6 +49,18 @@
 .splash-container {
   display: flex;
   justify-content: space-evenly;
+}
+
+.splash-animation {
+  position: absolute;
+  z-index: -1;
+  top: 30vh;
+  width: 80vw;
+  height: 80vh;
+  background-image: url("../img/sillyguy.gif");
+  background-position: contain;
+  background-repeat: no-repeat;
+  animation: move 30s linear infinite;
 }
 
 .main {

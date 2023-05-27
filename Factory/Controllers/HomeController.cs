@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Factory.Models;
 using System.Collections.Generic;
@@ -15,8 +17,12 @@ namespace Factory.Controllers
 
     public ActionResult Index()
     {
-      ViewBag.machines = _db.Machines.ToList();
-      ViewBag.engineers = _db.Engineers.ToList();
+      ViewBag.machines = _db.Machines
+                            .Include(machine => machine.Location)
+                            .ToList();
+      ViewBag.engineers = _db.Engineers
+                            .Include(engineer => engineer.Location)
+                            .ToList();
       return View();
     }
   }
