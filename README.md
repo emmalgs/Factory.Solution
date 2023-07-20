@@ -2,7 +2,7 @@
 
 ### By Emma Gerigscott
 
-<!-- ![gif of webpage in action](./Factory/wwwroot/img/factory.gif) -->
+![gif of webpage in action](./Factory/wwwroot/img/sillystringz.gif)
 
 ## Description
 
